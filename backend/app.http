@@ -1,0 +1,97 @@
+POST http://localhost:5000/api/auth/login
+Content-Type: application/json
+
+{
+  "email": "admin@clubconnect.com",
+  "password": "admin123"
+}
+
+###
+
+POST http://localhost:5000/api/clubs
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5N2NlZWU4YzhhOTZhNWQ2ZDhiOWY3OSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc2OTc5NjA1NSwiZXhwIjoxNzY5ODgyNDU1fQ.1WjcGNor3IIp_hf80-maiH90XewYayNy-0XZknOWZ9w
+Content-Type: application/json
+
+{
+  "clubName": "Coding Club",
+  "description": "Programming Community"
+}
+
+###
+
+GET http://localhost:5000/api/clubs
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5N2NlZWU4YzhhOTZhNWQ2ZDhiOWY3OSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc2OTc5NjA1NSwiZXhwIjoxNzY5ODgyNDU1fQ.1WjcGNor3IIp_hf80-maiH90XewYayNy-0XZknOWZ9w
+Content-Type: application/json
+
+### 
+
+POST http://localhost:5000/api/clubs/add-student
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5N2NlZWU4YzhhOTZhNWQ2ZDhiOWY3OSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc2OTc5NjA1NSwiZXhwIjoxNzY5ODgyNDU1fQ.1WjcGNor3IIp_hf80-maiH90XewYayNy-0XZknOWZ9w
+Content-Type: application/json
+
+{
+  "clubId": "697cf29e9e77581bb0ad9fd0",
+  "studentId": "697ceee8c8a96a5d6d8b9f79"
+}
+
+###
+
+POST http://localhost:5000/api/students/create
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5N2NlZWU4YzhhOTZhNWQ2ZDhiOWY3OSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc2OTc5NjA1NSwiZXhwIjoxNzY5ODgyNDU1fQ.1WjcGNor3IIp_hf80-maiH90XewYayNy-0XZknOWZ9w
+Content-Type: application/json
+
+{
+  "name":"jatin",
+  "email":"jatin2805hendre@gmail.com"
+}
+
+###
+
+POST http://localhost:5000/api/registrations
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5N2NlZWU4YzhhOTZhNWQ2ZDhiOWY3OSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc2OTc5NjA1NSwiZXhwIjoxNzY5ODgyNDU1fQ.1WjcGNor3IIp_hf80-maiH90XewYayNy-0XZknOWZ9w
+Content-Type: application/json
+
+{
+  "eventId":"697cfaa391bec987f335d8bd"
+}
+
+###
+GET http://localhost:5000/api/registrations
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5N2NlZWU4YzhhOTZhNWQ2ZDhiOWY3OSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc2OTc5NjA1NSwiZXhwIjoxNzY5ODgyNDU1fQ.1WjcGNor3IIp_hf80-maiH90XewYayNy-0XZknOWZ9w
+Content-Type: application/json
+
+###
+PATCH http://localhost:5000/api/registrations/697cfc8f9abe378a72fa2655
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5N2NlZWU4YzhhOTZhNWQ2ZDhiOWY3OSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc2OTc5NjA1NSwiZXhwIjoxNzY5ODgyNDU1fQ.1WjcGNor3IIp_hf80-maiH90XewYayNy-0XZknOWZ9w
+Content-Type: application/json
+
+{
+  "status":"approved"
+}
+
+###
+
+POST http://localhost:5000/api/feedback 
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5N2NlZWU4YzhhOTZhNWQ2ZDhiOWY3OSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc2OTc5NjA1NSwiZXhwIjoxNzY5ODgyNDU1fQ.1WjcGNor3IIp_hf80-maiH90XewYayNy-0XZknOWZ9w
+Content-Type: application/json
+
+{
+  "eventId": "697cfaa391bec987f335d8bd",
+  "rating": 5,
+  "comment": "Very good event"
+}
+
+###
+POST http://localhost:5000/api/certificates/generate 
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5N2NlZWU4YzhhOTZhNWQ2ZDhiOWY3OSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc2OTc5NjA1NSwiZXhwIjoxNzY5ODgyNDU1fQ.1WjcGNor3IIp_hf80-maiH90XewYayNy-0XZknOWZ9w
+Content-Type: application/json
+
+{
+  "studentId": "697cf54fa3089283121ca370",
+  "eventId": "697cfaa391bec987f335d8bd"
+}
+
+###
+GET http://localhost:5000/api/dashboard/stats
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5N2NlZWU4YzhhOTZhNWQ2ZDhiOWY3OSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc2OTc5NjA1NSwiZXhwIjoxNzY5ODgyNDU1fQ.1WjcGNor3IIp_hf80-maiH90XewYayNy-0XZknOWZ9w
+Content-Type: application/json
