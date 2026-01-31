@@ -4,7 +4,7 @@ import path from "path";
 import Certificate from "../models/Certificate.js";
 import User from "../models/User.js";
 import Event from "../models/Event.js";
-
+import Registration from "../models/Registration.js";
 export const generateCertificate = async (req, res) => {
   try {
     const { studentId, eventId } = req.body;
@@ -50,9 +50,17 @@ export const generateCertificate = async (req, res) => {
 };
 
 export const getMyCertificates = async (req, res) => {
-  const certs = await Certificate.find({
-    studentId: req.user.id
-  }).populate("eventId", "title");
+  const approvedEvents = await Registration.find({
+  studentId: req.user.id,
+  status: "approved"
+}).select("eventId");
+
+const eventIds = approvedEvents.map(r => r.eventId);
+
+const certs = await Certificate.find({
+  studentId: req.user.id,
+  eventId: { $in: eventIds }
+});
 
   res.json(certs);
 };
