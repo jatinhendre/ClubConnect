@@ -47,3 +47,9 @@ export const addStudentToClub = async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 };
+export const getClubById = async (req, res) => {
+  const club = await Club.findById(req.params.id)
+    .populate("members", "name email");
+
+  res.json(club);
+};

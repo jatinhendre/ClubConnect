@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import { AuthContext } from "../context/authContext";
-import { useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 
 function Navbar() {
 
@@ -13,7 +13,8 @@ function Navbar() {
   };
 
   return (
-    <div className="navbar">
+    <div style={{gap:"10px"}} className="navbar">
+      <NavLink to="/student/change-password">Change Password</NavLink>
       <button style={{color:"black"}} onClick={handleLogout}>Logout</button>
     </div>
   );

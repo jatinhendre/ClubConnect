@@ -25,23 +25,32 @@ function CreateStudent() {
   };
 
   return (
-    <form onSubmit={createStudent}>
-      <h3>Create Student</h3>
+    <div className="card">
+      <h3 className="mb-4">Create Student</h3>
+      <form onSubmit={createStudent}>
+        <div className="form-group">
+          <label>Student Name</label>
+          <input
+            className="form-input"
+            placeholder="Enter Student Name"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+          />
+        </div>
 
-      <input
-        placeholder="Student Name"
-        value={name}
-        onChange={(e)=>setName(e.target.value)}
-      />
+        <div className="form-group">
+          <label>Email Address</label>
+          <input
+            className="form-input"
+            placeholder="Enter Student Email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
+        </div>
 
-      <input
-        placeholder="Student Email"
-        value={email}
-        onChange={(e)=>setEmail(e.target.value)}
-      />
-
-      <button>Create Student</button>
-    </form>
+        <button className="btn btn-primary">Create Student</button>
+      </form>
+    </div>
   );
 }
 

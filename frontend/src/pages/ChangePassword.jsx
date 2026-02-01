@@ -26,25 +26,34 @@ function ChangePassword() {
   };
 
   return (
-    <form onSubmit={submit}>
-      <h3>Change Password</h3>
+    <div className="card" style={{ maxWidth: "500px", margin: "0 auto" }}>
+      <h3 className="mb-4">Change Password</h3>
+      <form onSubmit={submit}>
+        <div className="form-group">
+          <label>Old Password</label>
+          <input
+            className="form-input"
+            type="password"
+            placeholder="Enter Old Password"
+            value={oldPassword}
+            onChange={(e) => setOldPassword(e.target.value)}
+          />
+        </div>
 
-      <input
-        type="password"
-        placeholder="Old Password"
-        value={oldPassword}
-        onChange={(e)=>setOldPassword(e.target.value)}
-      />
+        <div className="form-group">
+          <label>New Password</label>
+          <input
+            className="form-input"
+            type="password"
+            placeholder="Enter New Password"
+            value={newPassword}
+            onChange={(e) => setNewPassword(e.target.value)}
+          />
+        </div>
 
-      <input
-        type="password"
-        placeholder="New Password"
-        value={newPassword}
-        onChange={(e)=>setNewPassword(e.target.value)}
-      />
-
-      <button>Change</button>
-    </form>
+        <button className="btn btn-primary w-full">Change Password</button>
+      </form>
+    </div>
   );
 }
 

@@ -39,45 +39,66 @@ function CreateEvent() {
   };
 
   return (
-    <form onSubmit={createEvent}>
-      <h3>Create Event</h3>
+    <div className="card">
+      <h3 className="mb-4">Create Event</h3>
+      <form onSubmit={createEvent}>
+        <div className="form-group">
+          <label>Event Title</label>
+          <input
+            className="form-input"
+            placeholder="Enter Event Title"
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+          />
+        </div>
 
-      <input
-        placeholder="Title"
-        value={title}
-        onChange={(e)=>setTitle(e.target.value)}
-      />
+        <div className="form-group">
+          <label>Description</label>
+          <textarea
+            className="form-input"
+            placeholder="Enter Description"
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
+            rows={3}
+          />
+        </div>
 
-      <input
-        placeholder="Description"
-        value={description}
-        onChange={(e)=>setDescription(e.target.value)}
-      />
+        <div className="form-group">
+          <label>Club</label>
+          {/* CLUB DROPDOWN */}
+          <select className="form-select" value={clubId} onChange={(e) => setClubId(e.target.value)}>
+            <option value="">Select Club</option>
 
-      {/* CLUB DROPDOWN */}
-      <select value={clubId} onChange={(e)=>setClubId(e.target.value)}>
-        <option value="">Select Club</option>
+            {clubs.map((club) => (
+              <option key={club._id} value={club._id}>
+                {club.clubName}
+              </option>
+            ))}
+          </select>
+        </div>
 
-        {clubs.map((club)=>(
-          <option key={club._id} value={club._id}>
-            {club.clubName}
-          </option>
-        ))}
-      </select>
+        <div className="form-group">
+          <label>Date</label>
+          <input
+            className="form-input"
+            type="date"
+            value={eventDate}
+            onChange={(e) => setEventDate(e.target.value)}
+          />
+        </div>
 
-      <input
-        type="date"
-        value={eventDate}
-        onChange={(e)=>setEventDate(e.target.value)}
-      />
+        <div className="form-group">
+          <label>Poster Image</label>
+          <input
+            className="form-input"
+            type="file"
+            onChange={(e) => setPoster(e.target.files[0])}
+          />
+        </div>
 
-      <input
-        type="file"
-        onChange={(e)=>setPoster(e.target.files[0])}
-      />
-
-      <button>Create</button>
-    </form>
+        <button className="btn btn-primary">Create Event</button>
+      </form>
+    </div>
   );
 }
 

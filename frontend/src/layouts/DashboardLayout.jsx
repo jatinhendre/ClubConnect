@@ -5,10 +5,10 @@ import "../styles/layout.css";
 
 function DashboardLayout() {
   return (
-    <div className="app-container" style={{fontSize: "14px"}}>
+    <div className="app-container">
       <Sidebar />
 
-      <div style={{ display: "flex", height: "100vh", width: "80vw" }} className="right-section">
+      <div className="right-section">
         <Navbar />
         <div className="content-area">
           <Outlet />

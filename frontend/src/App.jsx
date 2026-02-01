@@ -15,12 +15,12 @@ import ViewStudents from "./pages/admin/ViewStudents";
 
 // STUDENT
 import StudentDashboard from "./pages/student/studentDashboard.jsx";
-import ViewClubs from "./pages/student/ViewClubs";
+import ViewClubs from "./pages/ViewClubs.jsx"
 import ViewEvents from "./pages/student/ViewEvents";
 import Resources from "./pages/student/Resources";
 import Feedback from "./pages/student/Feedback";
 import MyCertificates from "./pages/student/MyCertificates";
-
+import Gallery from "./pages/Gallery.jsx"
 // COMMON
 import ChangePassword from "./pages/ChangePassword.jsx";
 
@@ -41,13 +41,14 @@ function App() {
           }
         >
           <Route path="/admin" element={<AdminDashboard />} />
+          <Route path="/admin/clubs" element={<ViewClubs />} />
           <Route path="/admin/create-club" element={<CreateClub />} />
           <Route path="/admin/create-event" element={<CreateEvent />} />
           <Route path="/admin/registrations" element={<Registrations />} />
           <Route path="/admin/upload-resource" element={<UploadResources />} />
           <Route path="/admin/create-student" element={<CreateStudent />} />
+          <Route path="/admin/gallery" element={<Gallery />} />
           <Route path="/admin/students" element={<ViewStudents />} />
-          <Route path="/change-password" element={<ChangePassword />} />
         </Route>
 
         {/* STUDENT AREA */}
@@ -59,12 +60,14 @@ function App() {
           }
         >
           <Route path="/student" element={<StudentDashboard />} />
+          
           <Route path="/student/clubs" element={<ViewClubs />} />
           <Route path="/student/events" element={<ViewEvents />} />
           <Route path="/student/resources" element={<Resources />} />
+          <Route path="/student/gallery" element={<Gallery />} />
           <Route path="/student/feedback" element={<Feedback />} />
           <Route path="/student/certificates" element={<MyCertificates />} />
-          <Route path="/change-password" element={<ChangePassword />} />
+          <Route path="/student/change-password" element={<ChangePassword />} />
         </Route>
 
       </Routes>

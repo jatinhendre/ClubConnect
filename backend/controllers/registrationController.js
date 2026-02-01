@@ -1,5 +1,6 @@
 import Registration from "../models/Registration.js";
-
+import Event from "../models/Event.js"
+import Club from "../models/Club.js"
 // Student registers
 export const registerEvent = async (req, res) => {
   try {
@@ -36,6 +37,7 @@ export const getRegistrations = async (req, res) => {
 };
 
 // Admin approve/reject
+// Admin approve/reject
 export const updateStatus = async (req, res) => {
   try {
     const { status } = req.body;
@@ -47,6 +49,18 @@ export const updateStatus = async (req, res) => {
 
     reg.status = status;
     await reg.save();
+
+    // ✅ ADD STUDENT INTO CLUB WHEN APPROVED
+    if (status === "approved") {
+
+      const event = await Event.findById(reg.eventId);
+
+      await Club.findByIdAndUpdate(
+        event.clubId,
+        { $addToSet: { members: reg.studentId } }
+      );
+
+    }
 
     res.json({ message: "Status updated" });
 

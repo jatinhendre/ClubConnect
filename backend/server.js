@@ -15,6 +15,7 @@ import certificateRoutes from "./routes/certificateRoutes.js";
 import dashboardRoutes from "./routes/dashboardRoutes.js";
 import userRoutes from "./routes/userRoutes.js";
 import adminRoutes from "./routes/adminRoutes.js";
+import galleryRoutes from "./routes/galleryRoutes.js";
 
 //multer
 const __filename = fileURLToPath(import.meta.url);
@@ -47,6 +48,9 @@ app.use("/api/certificates", certificateRoutes);
 app.use("/api/dashboard", dashboardRoutes);
 app.use("/api/users", userRoutes);
 app.use("/api/admin", adminRoutes);
+app.use("/api/dashboard", dashboardRoutes);
+app.use("/api/gallery", galleryRoutes);
+
 
 app.get("/", (req, res) => {
   res.send("Club Connect API Running");

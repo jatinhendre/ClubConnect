@@ -9,7 +9,7 @@ function UploadResource() {
   const [file, setFile] = useState(null);
 
   useEffect(() => {
-    api.get("/events").then((res)=>{
+    api.get("/events").then((res) => {
       setEvents(res.data);
     });
   }, []);
@@ -27,24 +27,42 @@ function UploadResource() {
   };
 
   return (
-    <form onSubmit={upload}>
-      <h3>Upload Resource</h3>
+    <div className="card">
+      <h3 className="mb-4">Upload Resource</h3>
+      <form onSubmit={upload}>
+        <div className="form-group">
+          <label>Title</label>
+          <input
+            className="form-input"
+            placeholder="Enter Title"
+            onChange={(e) => setTitle(e.target.value)}
+          />
+        </div>
 
-      <input placeholder="Title" onChange={(e)=>setTitle(e.target.value)} />
+        <div className="form-group">
+          <label>Event</label>
+          <select className="form-select" onChange={(e) => setEventId(e.target.value)}>
+            <option value="">Select Event</option>
+            {events.map(ev => (
+              <option key={ev._id} value={ev._id}>
+                {ev.title}
+              </option>
+            ))}
+          </select>
+        </div>
 
-      <select onChange={(e)=>setEventId(e.target.value)}>
-        <option value="">Select Event</option>
-        {events.map(ev=>(
-          <option key={ev._id} value={ev._id}>
-            {ev.title}
-          </option>
-        ))}
-      </select>
+        <div className="form-group">
+          <label>Resource File</label>
+          <input
+            className="form-input"
+            type="file"
+            onChange={(e) => setFile(e.target.files[0])}
+          />
+        </div>
 
-      <input type="file" onChange={(e)=>setFile(e.target.files[0])} />
-
-      <button>Upload</button>
-    </form>
+        <button className="btn btn-primary">Upload Resource</button>
+      </form>
+    </div>
   );
 }
 

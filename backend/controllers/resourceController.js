@@ -1,5 +1,5 @@
 import Resource from "../models/Resource.js";
-
+import Registration from "../models/Registration.js";
 export const uploadResource = async (req, res) => {
   try {
     const { title, eventId } = req.body;

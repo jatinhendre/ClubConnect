@@ -2,11 +2,10 @@ import { useEffect, useState } from "react";
 import api from "../../api/api";
 
 function ViewEvents() {
-
   const [events, setEvents] = useState([]);
 
   useEffect(() => {
-    api.get("/events").then((res)=>{
+    api.get("/events").then((res) => {
       setEvents(res.data);
     });
   }, []);
@@ -18,25 +17,41 @@ function ViewEvents() {
 
   return (
     <div>
-      <h3>Events</h3>
+      <h3 className="mb-4">Upcoming Events</h3>
 
-      {events.map((event)=>(
-        <div key={event._id}>
-          <h4>{event.title}</h4>
-          <p>{event.description}</p>
+      <div className="grid-container">
+        {events.map((event) => (
+          <div
+            key={event._id}
+            className="card"
+            style={{ display: "flex", flexDirection: "column" }}
+          >
+            {event.poster && (
+              <div className="poster-wrapper">
+                <img
+                  src={`http://localhost:5000/uploads/${event.poster}`}
+                  alt={event.title}
+                />
+              </div>
+            )}
 
-          {event.poster && (
-            <img
-              src={`http://localhost:5000/uploads/${event.poster}`}
-              width="200"
-            />
-          )}
+            <h4 className="mb-2">{event.title}</h4>
+            <p style={{ color: "#666", flex: 1, marginBottom: "16px" }}>
+              {event.description}
+            </p>
 
-          <button onClick={()=>registerEvent(event._id)}>
-            Register
-          </button>
-        </div>
-      ))}
+            <button
+              className="btn btn-primary w-full"
+              onClick={() => registerEvent(event._id)}
+            >
+              Register Now
+            </button>
+          </div>
+        ))}
+      </div>
+      {events.length === 0 && (
+        <p className="text-center">No upcoming events.</p>
+      )}
     </div>
   );
 }

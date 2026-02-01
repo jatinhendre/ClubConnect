@@ -1,7 +1,7 @@
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { useContext } from "react";
 import { AuthContext } from "../context/authContext";
-
+import ViewClubs from "../pages/ViewClubs"
 function Sidebar() {
 
   const { user } = useContext(AuthContext);
@@ -9,26 +9,33 @@ function Sidebar() {
   return (
     <div className="sidebar">
 
-      <h2 className="logo">ClubConnect</h2>
+      <div className="logo-container">
+        <img src="/logo.png" alt="ClubConnect Logo" className="logo-icon" />
+        <img src="/logo-name.png" alt="ClubConnect" className="logo-text" />
+      </div>
 
       {user?.role === "admin" && (
         <>
-          <Link to="/admin">Dashboard</Link>
-          <Link to="/admin/create-student">Create Student</Link>
-          <Link to="/admin/create-club">Create Club</Link>
-          <Link to="/admin/create-event">Create Event</Link>
-          <Link to="/admin/registrations">Registrations</Link>
-          <Link to="/admin/upload-resource">Upload Resource</Link>
+          <NavLink to="/admin" end>Dashboard</NavLink>
+          <NavLink to="/admin/clubs">View Clubs</NavLink>
+          <NavLink to="/admin/create-student">Create Student</NavLink>
+          <NavLink to="/admin/create-club">Create Club</NavLink>
+          <NavLink to="/admin/create-event">Create Event</NavLink>
+          <NavLink to="/admin/registrations">Registrations</NavLink>
+          <NavLink to="/admin/gallery">Gallery</NavLink>
+          <NavLink to="/admin/upload-resource">Upload Resource</NavLink>
         </>
       )}
 
       {user?.role === "student" && (
         <>
-          <Link to="/student">Dashboard</Link>
-          <Link to="/student/events">Events</Link>
-          <Link to="/student/resources">Resources</Link>
-          <Link to="/student/feedback">Feedback</Link>
-          <Link to="/student/certificates">Certificates</Link>
+          <NavLink to="/student" end>Dashboard</NavLink>
+          <NavLink to="/student/clubs">View Clubs</NavLink>
+          <NavLink to="/student/events">Events</NavLink>
+          <NavLink to="/student/resources">Resources</NavLink>
+          <NavLink to="/student/feedback">Feedback</NavLink>
+          <NavLink to="/student/gallery">Gallery</NavLink>
+          <NavLink to="/student/certificates">Certificates</NavLink>
         </>
       )}
 

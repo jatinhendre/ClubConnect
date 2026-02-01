@@ -1,9 +1,13 @@
 import express from "express";
-import { getStats } from "../controllers/dashboardController.js";
-import { protect, adminOnly } from "../middleware/authMiddleware.js";
+import { protect } from "../middleware/authMiddleware.js";
+import {
+  adminStats,
+  studentStats
+} from "../controllers/dashboardController.js";
 
 const router = express.Router();
 
-router.get("/stats", protect, adminOnly, getStats);
+router.get("/admin", protect, adminStats);
+router.get("/student", protect, studentStats);
 
 export default router;
