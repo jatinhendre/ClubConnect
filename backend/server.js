@@ -16,6 +16,8 @@ import dashboardRoutes from "./routes/dashboardRoutes.js";
 import userRoutes from "./routes/userRoutes.js";
 import adminRoutes from "./routes/adminRoutes.js";
 import galleryRoutes from "./routes/galleryRoutes.js";
+import announcementRoutes from "./routes/announcementRoutes.js";
+import clubRegistrationRoutes from "./routes/clubRegistrationRoutes.js";
 
 //multer
 const __filename = fileURLToPath(import.meta.url);
@@ -29,7 +31,7 @@ const app = express();
 
 app.use(
   cors({
-    origin: "http://localhost:5173",
+    origin: ["http://localhost:5175", "http://localhost:5176"],
     credentials: true
   })
 );
@@ -50,6 +52,8 @@ app.use("/api/users", userRoutes);
 app.use("/api/admin", adminRoutes);
 app.use("/api/dashboard", dashboardRoutes);
 app.use("/api/gallery", galleryRoutes);
+app.use("/api/announcements", announcementRoutes);
+app.use("/api/club-registrations", clubRegistrationRoutes);
 
 
 app.get("/", (req, res) => {

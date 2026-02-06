@@ -1,23 +1,6 @@
 import Club from "../models/Club.js";
 import User from "../models/User.js";
 
-// Create Club
-export const createClub = async (req, res) => {
-  try {
-    const { clubName, description } = req.body;
-
-    const club = await Club.create({
-      clubName,
-      description,
-      createdBy: req.user.id
-    });
-
-    res.status(201).json(club);
-  } catch (error) {
-    res.status(500).json({ message: error.message });
-  }
-};
-
 // Get All Clubs
 export const getClubs = async (req, res) => {
   const clubs = await Club.find();
