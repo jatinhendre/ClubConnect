@@ -11,6 +11,9 @@ import "./styles/components.css";
 import "./styles/layout.css";
 import ViewEvents from "./pages/ViewEvents";
 import ViewAnnouncements from "./pages/ViewAnnouncements";
+import Gallery from "./pages/Gallery";
+import Resources from "./pages/Resources";
+import MyCertificates from "./pages/MyCertificates";
 
 function App() {
   return (
@@ -32,6 +35,9 @@ function App() {
             <Route path="/clubs" element={<ViewClubs />} />
             <Route path='/events' element={<ViewEvents/>}/>
             <Route path='/announcements' element={<ViewAnnouncements/>}/>
+            <Route path='/gallery' element={<Gallery/>}/>
+            <Route path='/resources' element={<Resources/>}/>
+            <Route path='/certificates' element={<MyCertificates/>}/>
           </Route>
         </Routes>
       </BrowserRouter>
