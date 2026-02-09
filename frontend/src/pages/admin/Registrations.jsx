@@ -40,14 +40,14 @@ function Registrations() {
       status === "approved"
         ? "#d4edda"
         : status === "rejected"
-        ? "#f8d7da"
-        : "#fff3cd",
+          ? "#f8d7da"
+          : "#fff3cd",
     color:
       status === "approved"
         ? "#155724"
         : status === "rejected"
-        ? "#721c24"
-        : "#856404"
+          ? "#721c24"
+          : "#856404"
   });
 
   return (
@@ -70,8 +70,8 @@ function Registrations() {
             {regs.map((r) => (
               <tr key={r._id}>
 
-                <td style={{color:"black"}}>{r.studentId?.name}</td>
-                <td style={{color:"black"}}>{r.eventId?.title}</td>
+                <td>{r.studentId?.name}</td>
+                <td>{r.eventId?.title}</td>
 
                 <td>
                   <span style={statusStyle(r.status)}>

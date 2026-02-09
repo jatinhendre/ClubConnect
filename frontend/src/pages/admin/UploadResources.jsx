@@ -60,7 +60,7 @@ function UploadResource() {
           />
         </div>
 
-        <button className="btn btn-primary">Upload Resource</button>
+        <button className="btn btn-primary" onClick={upload}>Upload Resource</button>
       </form>
     </div>
   );

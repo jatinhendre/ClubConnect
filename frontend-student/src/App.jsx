@@ -14,6 +14,7 @@ import ViewAnnouncements from "./pages/ViewAnnouncements";
 import Gallery from "./pages/Gallery";
 import Resources from "./pages/Resources";
 import MyCertificates from "./pages/MyCertificates";
+import Feedback from "./pages/Feedback";
 
 function App() {
   return (
@@ -38,6 +39,7 @@ function App() {
             <Route path='/gallery' element={<Gallery/>}/>
             <Route path='/resources' element={<Resources/>}/>
             <Route path='/certificates' element={<MyCertificates/>}/>
+            <Route path='/feedback' element={<Feedback/>}/>
           </Route>
         </Routes>
       </BrowserRouter>

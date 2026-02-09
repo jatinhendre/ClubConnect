@@ -10,7 +10,7 @@ import { protect, adminOnly } from "../middleware/authMiddleware.js";
 const router = express.Router();
 
 router.post("/", protect, adminOnly, createAnnouncement);
-router.get("/all", protect, adminOnly, getAllAnnouncements);
+router.get("/all", protect, getAllAnnouncements);
 router.get("/my", protect, getMyAnnouncements);
 router.delete("/:id", protect, adminOnly, deleteAnnouncement);
 

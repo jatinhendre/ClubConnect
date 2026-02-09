@@ -10,10 +10,7 @@ function ViewEvents() {
     });
   }, []);
 
-  const registerEvent = async (id) => {
-    await api.post("/registrations", { eventId: id });
-    alert("Registered");
-  };
+
 
   return (
     <div>
@@ -36,7 +33,7 @@ function ViewEvents() {
             )}
 
             <h4 className="mb-2">{event.title}</h4>
-            <p style={{ color: "#666", flex: 1, marginBottom: "16px" }}>
+            <p className="text-secondary" style={{ flex: 1, marginBottom: "16px" }}>
               {event.description}
             </p>
 

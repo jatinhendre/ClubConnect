@@ -38,19 +38,19 @@ function ViewEvents() {
           <tbody>
             {events.map(event => (
               <tr key={event._id}>
-                <td style={{color:"black"}}>{event.title}</td>
-                <td style={{color:"black"}}>
+                <td>{event.title}</td>
+                <td>
                   {event.clubId?.clubName || "N/A"}
                 </td>
-                <td style={{color:"black"}}>
+                <td>
                   {formatDate(event.eventDate)}
                 </td>
-                <td style={{color:"black", maxWidth: "300px"}}>
+                <td style={{ maxWidth: "300px" }}>
                   {event.description}
                 </td>
                 <td>
                   {event.poster ? (
-                    <img 
+                    <img
                       src={`http://localhost:5000/uploads/${event.poster}`}
                       alt={event.title}
                       style={{
@@ -61,7 +61,7 @@ function ViewEvents() {
                       }}
                     />
                   ) : (
-                    <span style={{ color: "#888" }}>No poster</span>
+                    <span className="text-secondary">No poster</span>
                   )}
                 </td>
               </tr>

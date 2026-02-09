@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import api from "../api/api";
 
 function Dashboard() {
@@ -15,59 +16,95 @@ function Dashboard() {
       .finally(() => setLoading(false));
   }, []);
 
-  if (loading) return <p>Loading...</p>;
+  if (loading) {
+    return (
+      <div>
+        <div className="skeleton skeleton-title"></div>
+        <div className="grid-container mt-6">
+          <div className="skeleton" style={{ height: '150px' }}></div>
+          <div className="skeleton" style={{ height: '150px' }}></div>
+          <div className="skeleton" style={{ height: '150px' }}></div>
+        </div>
+      </div>
+    );
+  }
+
+  const statCards = [
+    {
+      label: "Clubs Joined",
+      value: stats?.clubs || 0,
+      color: "var(--primary)",
+      bgColor: "var(--primary-light)",
+      icon: "🎯"
+    },
+    {
+      label: "Events Registered",
+      value: stats?.registrations || 0,
+      color: "var(--success)",
+      bgColor: "var(--success-light)",
+      icon: "📅"
+    },
+    {
+      label: "Certificates Earned",
+      value: stats?.certificates || 0,
+      color: "var(--warning)",
+      bgColor: "var(--warning-light)",
+      icon: "🏆"
+    }
+  ];
+
+  const quickLinks = [
+    { label: "Browse Events", path: "/student/events", variant: "btn-primary", icon: "📅" },
+    { label: "View Clubs", path: "/student/clubs", variant: "btn-secondary", icon: "🎯" },
+    { label: "My Resources", path: "/student/resources", variant: "btn-secondary", icon: "📚" },
+    { label: "My Certificates", path: "/student/certificates", variant: "btn-secondary", icon: "🏆" }
+  ];
 
   return (
     <div>
 
-      <h3 className="mb-4">Student Dashboard</h3>
-
-      <div className="grid-container">
-
-        <div className="card">
-          <h2 style={{ fontSize: "2.5rem", color: "var(--primary)", marginBottom: "8px" }}>
-            {stats?.clubs || 0}
-          </h2>
-          <p style={{ color: "var(--text-secondary)", fontSize: "0.95rem" }}>
-            Clubs Joined
-          </p>
-        </div>
-
-        <div className="card">
-          <h2 style={{ fontSize: "2.5rem", color: "var(--success)", marginBottom: "8px" }}>
-            {stats?.registrations || 0}
-          </h2>
-          <p style={{ color: "var(--text-secondary)", fontSize: "0.95rem" }}>
-            Events Registered
-          </p>
-        </div>
-
-        <div className="card">
-          <h2 style={{ fontSize: "2.5rem", color: "var(--warning)", marginBottom: "8px" }}>
-            {stats?.certificates || 0}
-          </h2>
-          <p style={{ color: "var(--text-secondary)", fontSize: "0.95rem" }}>
-            Certificates Earned
-          </p>
-        </div>
-
+      <div className="page-header">
+        <h2>Student Dashboard</h2>
+        <p className="text-secondary">Welcome back! Here's your activity overview.</p>
       </div>
 
-      <div className="card" style={{ marginTop: "32px" }}>
-        <h4 style={{ marginBottom: "16px", color: "var(--primary)" }}>Quick Links</h4>
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))", gap: "16px" }}>
-          <a href="/events" className="btn btn-primary" style={{ textDecoration: "none" }}>
-            Browse Events
-          </a>
-          <a href="/clubs" className="btn btn-secondary" style={{ textDecoration: "none" }}>
-            View Clubs
-          </a>
-          <a href="/announcements" className="btn btn-secondary" style={{ textDecoration: "none" }}>
-            Announcements
-          </a>
-          <a href="/certificates" className="btn btn-secondary" style={{ textDecoration: "none" }}>
-            My Certificates
-          </a>
+      <div className="grid-container">
+        {statCards.map((stat, index) => (
+          <div key={index} className="stat-card">
+            <div
+              className="stat-icon"
+              style={{
+                background: stat.bgColor,
+                color: stat.color
+              }}
+            >
+              {stat.icon}
+            </div>
+            <div className="stat-value" style={{ color: stat.color }}>
+              {stat.value}
+            </div>
+            <div className="stat-label">{stat.label}</div>
+          </div>
+        ))}
+      </div>
+
+      <div className="card mt-8">
+        <div className="card-header">
+          <h4 className="card-title">Quick Links</h4>
+          <p className="card-subtitle">Access your most used features</p>
+        </div>
+        <div className="card-body">
+          <div className="grid-4">
+            {quickLinks.map((link, index) => (
+              <Link
+                key={index}
+                to={link.path}
+                className={`btn ${link.variant}`}
+              >
+                {link.icon} {link.label}
+              </Link>
+            ))}
+          </div>
         </div>
       </div>
 

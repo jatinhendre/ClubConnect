@@ -22,19 +22,18 @@ function ViewClubs() {
 
       {/* LEFT - CLUB LIST */}
       <div>
-        <h3 style={{color:"black"}}>Clubs</h3>
+        <h3>Clubs</h3>
         <br></br>
         {clubs.map(c => (
-            <>
-          <div
-            key={c._id}
-            style={{color:"black"}}
-            className={`card club-item ${selectedClub?._id === c._id ? "card-active" : ""}`}
-            onClick={() => loadClub(c._id)}
-          >
-            {c.clubName}
-          </div>
-          <br></br>
+          <>
+            <div
+              key={c._id}
+              className={`card club-item ${selectedClub?._id === c._id ? "card-active" : ""}`}
+              onClick={() => loadClub(c._id)}
+            >
+              {c.clubName}
+            </div>
+            <br></br>
           </>
         ))}
       </div>

@@ -64,14 +64,14 @@ function ViewAnnouncements() {
               <h4 style={{ marginBottom: "8px", color: "var(--primary)" }}>
                 {announcement.title}
               </h4>
-              
-              <p style={{ color: "#666", fontSize: "14px", marginBottom: "12px" }}>
-                <strong>Club:</strong> {announcement.clubId?.clubName} | 
-                <strong> Posted by:</strong> {announcement.createdBy?.name} | 
+
+              <p className="text-secondary" style={{ fontSize: "14px", marginBottom: "12px" }}>
+                <strong>Club:</strong> {announcement.clubId?.clubName} |
+                <strong> Posted by:</strong> {announcement.createdBy?.name} |
                 <strong> Date:</strong> {formatDate(announcement.createdAt)}
               </p>
 
-              <p style={{ color: "black", lineHeight: "1.6" }}>
+              <p style={{ lineHeight: "1.6" }}>
                 {announcement.message}
               </p>
             </div>
