@@ -15,6 +15,7 @@ import Gallery from "./pages/Gallery";
 import Resources from "./pages/Resources";
 import MyCertificates from "./pages/MyCertificates";
 import Feedback from "./pages/Feedback";
+import ChangePassword from "./pages/ChangePassword";
 
 function App() {
   return (
@@ -40,6 +41,8 @@ function App() {
             <Route path='/resources' element={<Resources/>}/>
             <Route path='/certificates' element={<MyCertificates/>}/>
             <Route path='/feedback' element={<Feedback/>}/>
+            <Route path='/change-password' element={<ChangePassword/>}/>
+
           </Route>
         </Routes>
       </BrowserRouter>

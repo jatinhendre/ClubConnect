@@ -9,6 +9,10 @@ function ViewEvents() {
       setEvents(res.data);
     });
   }, []);
+const registerEvent = async (id) => {
+    await api.post("/registrations", { eventId: id });
+    alert("Registered");
+  };
 
 
 
