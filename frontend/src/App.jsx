@@ -68,7 +68,7 @@ function App() {
           }
         >
           <Route path="/student" element={<StudentDashboard />} />
-          
+
           <Route path="/student/clubs" element={<ViewClubs />} />
           <Route path="/student/events" element={<ViewEvents />} />
           <Route path="/student/resources" element={<Resources />} />

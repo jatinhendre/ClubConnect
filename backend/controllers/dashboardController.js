@@ -26,23 +26,26 @@ export const adminStats = async (req, res) => {
 export const studentStats = async (req, res) => {
   try {
 
-    const registrations = await Registration.countDocuments({
-      studentId: req.user.id,
-      status: "approved"
-    });
+    // Get detailed registrations with event details
+    const registrations = await Registration.find({
+      studentId: req.user.id
+    }).populate("eventId", "title eventDate");
+
+    // Get detailed club memberships
+    const clubs = await Club.find({
+      members: req.user.id
+    }).select("clubName description");
 
     const certificates = await Certificate.countDocuments({
       studentId: req.user.id
     });
 
-    const clubs = await Club.countDocuments({
-      members: req.user.id
-    });
-
     res.json({
-      registrations,
+      registrationsCount: registrations.length,
+      registrations, // Send the full list
       certificates,
-      clubs
+      clubsCount: clubs.length,
+      clubs // Send the full list
     });
 
   } catch (err) {
