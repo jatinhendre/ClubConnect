@@ -1,4 +1,6 @@
 import Event from "../models/Event.js";
+import path from "path";
+import fs from "fs";
 import Resource from "../models/Resource.js";
 import Gallery from "../models/Gallery.js";
 
@@ -36,6 +38,33 @@ export const getGallery = async (req, res) => {
     res.json(photos);
   } catch (err) {
     res.status(500).json({ message: err.message });
+  }
+};
+// Download gallery photo
+export const downloadGalleryPhoto = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    // Find photo in DB
+    const photo = await Gallery.findById(id);
+
+    if (!photo) {
+      return res.status(404).json({ message: "Photo not found" });
+    }
+
+    // Create full file path
+    const filePath = path.join(process.cwd(), "uploads", photo.image);
+
+    // Check if file exists
+    if (!fs.existsSync(filePath)) {
+      return res.status(404).json({ message: "File not found on server" });
+    }
+
+    // Send file for download
+    res.download(filePath, photo.image);
+
+  } catch (error) {
+    res.status(500).json({ message: error.message });
   }
 };
 

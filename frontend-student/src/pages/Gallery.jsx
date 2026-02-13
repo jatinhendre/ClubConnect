@@ -8,7 +8,7 @@ function Gallery() {
   const [photos, setPhotos] = useState([]);
   const [loading, setLoading] = useState(true);
   const { user } = useContext(AuthContext);
-
+  
   useEffect(() => {
     loadGallery();
   }, []);
@@ -21,6 +21,27 @@ function Gallery() {
       .catch(err => console.error(err))
       .finally(() => setLoading(false));
   };
+  const downloadPhoto = async (id, filename) => {
+  try {
+    const response = await api.get(`/gallery/download/${id}`, {
+      responseType: "blob",
+    });
+
+    const blob = new Blob([response.data]);
+    const url = window.URL.createObjectURL(blob);
+
+    const link = document.createElement("a");
+    link.href = url;
+    link.download = filename;
+    document.body.appendChild(link);
+    link.click();
+
+    link.remove();
+    window.URL.revokeObjectURL(url);
+  } catch (error) {
+    alert("Failed to download photo");
+  }
+};
 
   const deletePhoto = async (id) => {
     if (!confirm("Are you sure you want to delete this photo?")) {
@@ -67,7 +88,17 @@ function Gallery() {
               <h4 style={{ fontSize: "16px", marginBottom: "4px" }}>
                 {photo.title}
               </h4>
-              
+              <button
+  className="btn-primary"
+  onClick={() => downloadPhoto(photo._id, photo.image)}
+  style={{
+    marginTop: "8px",
+    padding: "4px 8px",
+    fontSize: "12px"
+  }}
+>
+  Download
+</button>
               {photo.description && (
                 <p style={{ fontSize: "14px", color: "#666", marginBottom: "8px" }}>
                   {photo.description}

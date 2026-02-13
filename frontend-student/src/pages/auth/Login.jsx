@@ -212,8 +212,8 @@ function Login() {
             <div className="login-footer">
               <p>
                 Need help? Contact{" "}
-                <a href="mailto:snehhha27@gmail.com">
-                  snehhha27@gmail.com
+                <a href="mailto:connectclub48@gmail.com">
+                  connectclub48@gmail.com
                 </a>
               </p>
             </div>
