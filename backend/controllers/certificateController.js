@@ -1,5 +1,4 @@
 import PDFDocument from "pdfkit";
-import fs from "fs";
 import Certificate from "../models/Certificate.js";
 import User from "../models/User.js";
 import Event from "../models/Event.js";
@@ -222,24 +221,49 @@ export const generateCertificate = async (req, res) => {
       return res.status(404).json({ message: "Invalid data" });
     }
 
-    const fileName = `cert-${student._id}-${event._id}.pdf`;
-    const filePath = `uploads/${fileName}`;
-
-    const doc = new PDFDocument({ size: "Letter" });
-    doc.pipe(fs.createWriteStream(filePath));
-
-    buildCertificatePDF(doc, student, event);
-
-    doc.end();
-
+    // Just create the record — PDF is generated on-the-fly when downloaded
     const cert = await Certificate.create({
       studentId,
       eventId,
-      file: fileName,
       generatedBy: req.user.id,
     });
 
     res.status(201).json(cert);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+// Download certificate — generates PDF on-the-fly and streams it
+export const downloadCertificate = async (req, res) => {
+  try {
+    const cert = await Certificate.findById(req.params.id);
+
+    if (!cert) {
+      return res.status(404).json({ message: "Certificate not found" });
+    }
+
+    const [student, event] = await Promise.all([
+      User.findById(cert.studentId),
+      Event.findById(cert.eventId),
+    ]);
+
+    if (!student || !event) {
+      return res.status(404).json({ message: "Invalid certificate data" });
+    }
+
+    // Generate PDF and stream directly to the client
+    const doc = new PDFDocument({ size: "Letter" });
+
+    res.setHeader("Content-Type", "application/pdf");
+    res.setHeader(
+      "Content-Disposition",
+      `inline; filename="certificate-${student.name}-${event.title}.pdf"`
+    );
+
+    doc.pipe(res);
+    buildCertificatePDF(doc, student, event);
+    doc.end();
   } catch (error) {
     res.status(500).json({ message: error.message });
   }

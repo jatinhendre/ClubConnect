@@ -1,10 +1,12 @@
 import { useState } from "react";
 import api from "../api/api"
+import { useAlert } from "../context/AlertContext";
 
 function ChangePassword() {
 
   const [oldPassword, setOldPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
+  const { showAlert } = useAlert();
 
   const submit = async (e) => {
     e.preventDefault();
@@ -15,13 +17,13 @@ function ChangePassword() {
         newPassword
       });
 
-      alert("Password changed");
+      showAlert("Password changed successfully", "success");
 
       setOldPassword("");
       setNewPassword("");
 
     } catch (err) {
-      alert(err.response?.data?.message || "Error");
+      showAlert(err.response?.data?.message || "Error changing password", "error");
     }
   };
 

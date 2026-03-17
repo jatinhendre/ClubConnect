@@ -1,13 +1,21 @@
 import Resource from "../models/Resource.js";
 import Registration from "../models/Registration.js";
+import { uploadToCloudinary } from "../config/cloudinary.js";
+
 export const uploadResource = async (req, res) => {
   try {
     const { title, eventId } = req.body;
 
+    // Upload file to Cloudinary
+    const result = await uploadToCloudinary(req.file.buffer, {
+      folder: "clubconnect/resources",
+      resource_type: "auto",
+    });
+
     const resource = await Resource.create({
       title,
       eventId,
-      file: req.file.filename,
+      file: result.secure_url,
       uploadedBy: req.user.id
     });
 

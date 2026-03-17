@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import api from "../../api/api";
+import { useAlert } from "../../context/AlertContext";
 
 function UploadResource() {
 
@@ -7,6 +8,7 @@ function UploadResource() {
   const [title, setTitle] = useState("");
   const [eventId, setEventId] = useState("");
   const [file, setFile] = useState(null);
+  const { showAlert } = useAlert();
 
   useEffect(() => {
     api.get("/events").then((res) => {
@@ -22,8 +24,12 @@ function UploadResource() {
     formData.append("eventId", eventId);
     formData.append("file", file);
 
-    await api.post("/resources", formData);
-    alert("Uploaded");
+    try {
+      await api.post("/resources", formData);
+      showAlert("Uploaded successfully", "success");
+    } catch (err) {
+      showAlert("Failed to upload", "error");
+    }
   };
 
   return (

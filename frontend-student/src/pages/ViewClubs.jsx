@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import api from "../api/api";
+import { useAlert } from "../context/AlertContext";
 
 function ViewClubs() {
 
@@ -14,6 +15,7 @@ function ViewClubs() {
   });
   const [registering, setRegistering] = useState(false);
   const [myRegistrations, setMyRegistrations] = useState([]);
+  const { showAlert } = useAlert();
 
   useEffect(() => {
     fetchClubs();
@@ -69,11 +71,11 @@ function ViewClubs() {
         ...formData
       });
       
-      alert("Registration submitted successfully! Please wait for admin approval.");
+      showAlert("Registration submitted successfully! Please wait for admin approval.", "success");
       handleCloseModal();
       fetchMyRegistrations();
     } catch (error) {
-      alert(error.response?.data?.message || "Registration failed");
+      showAlert(error.response?.data?.message || "Registration failed", "error");
     } finally {
       setRegistering(false);
     }

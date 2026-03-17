@@ -2,12 +2,14 @@ import { useEffect, useState } from "react";
 import { useContext } from "react";
 import { AuthContext } from "../context/authContext";
 import api from "../api/api";
+import { useAlert } from "../context/AlertContext";
 
 function Gallery() {
 
   const [photos, setPhotos] = useState([]);
   const [loading, setLoading] = useState(true);
   const { user } = useContext(AuthContext);
+  const { showAlert } = useAlert();
 
   useEffect(() => {
     loadGallery();
@@ -31,7 +33,7 @@ function Gallery() {
       await api.delete(`/gallery/${id}`);
       loadGallery();
     } catch (error) {
-      alert("Failed to delete photo");
+      showAlert("Failed to delete photo", "error");
     }
   };
 
@@ -51,7 +53,7 @@ function Gallery() {
         {photos.map(photo => (
           <div key={photo._id} className="card" style={{ position: "relative" }}>
             <img
-              src={`http://localhost:5000/uploads/${photo.image}`}
+              src={photo.image}
               className="gallery-img"
               alt={photo.title}
               loading="lazy"

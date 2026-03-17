@@ -1,11 +1,13 @@
 import { useEffect, useState } from "react";
 import api from "../../api/api"; // Ensure this path is correct based on your file structure
+import { useAlert } from "../../context/AlertContext";
 
 function ViewEvents() {
   const [events, setEvents] = useState([]);
   const [selectedFeedback, setSelectedFeedback] = useState([]);
   const [showModal, setShowModal] = useState(false);
   const [loadingFeedback, setLoadingFeedback] = useState(false);
+  const { showAlert } = useAlert();
 
   useEffect(() => {
     fetchEvents();
@@ -27,7 +29,7 @@ function ViewEvents() {
       setSelectedFeedback(res.data);
     } catch (error) {
       console.error("Error fetching feedback:", error);
-      alert("Failed to fetch feedback.");
+      showAlert("Failed to fetch feedback.", "error");
     } finally {
       setLoadingFeedback(false);
     }
@@ -73,7 +75,7 @@ function ViewEvents() {
                 <td>
                   {event.poster ? (
                     <img
-                      src={`http://localhost:5000/uploads/${event.poster}`}
+                      src={event.poster}
                       alt={event.title}
                       style={{
                         width: "80px",

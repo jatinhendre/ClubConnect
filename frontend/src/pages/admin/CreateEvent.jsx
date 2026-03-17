@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import api from "../../api/api";
+import { useAlert } from "../../context/AlertContext";
 
 function CreateEvent() {
 
@@ -10,6 +11,7 @@ function CreateEvent() {
 
   const [clubs, setClubs] = useState([]);
   const [clubId, setClubId] = useState("");
+  const { showAlert } = useAlert();
 
 
   useEffect(() => {
@@ -28,8 +30,12 @@ function CreateEvent() {
     formData.append("eventDate", eventDate);
     formData.append("poster", poster);
 
-    await api.post("/events", formData);
-    alert("Event Created");
+    try {
+      await api.post("/events", formData);
+      showAlert("Event Created successfully", "success");
+    } catch (error) {
+      showAlert("Failed to create event", "error");
+    }
 
     setTitle("");
     setDescription("");
