@@ -1,10 +1,12 @@
 import { useState } from "react";
 import api from "../../api/api";
+import { useAlert } from "../../context/AlertContext";
 
 function CreateStudent() {
 
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
+  const { showAlert } = useAlert();
 
   const createStudent = async (e) => {
     e.preventDefault();
@@ -15,12 +17,12 @@ function CreateStudent() {
         email
       });
 
-      alert("Student created & email sent");
+      showAlert("Student created & email sent", "success");
 
       setName("");
       setEmail("");
     } catch (err) {
-      alert(err.response?.data?.message || "Error creating student");
+      showAlert(err.response?.data?.message || "Error creating student", "error");
     }
   };
 

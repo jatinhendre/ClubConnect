@@ -1,10 +1,12 @@
 import { useState, useEffect } from "react";
 import api from "../../api/api";
+import { useAlert } from "../../context/AlertContext";
 
 function ViewAnnouncements() {
 
   const [announcements, setAnnouncements] = useState([]);
   const [loading, setLoading] = useState(true);
+  const { showAlert } = useAlert();
 
   useEffect(() => {
     loadAnnouncements();
@@ -28,9 +30,10 @@ function ViewAnnouncements() {
 
     try {
       await api.delete(`/announcements/${id}`);
+      showAlert("Announcement deleted successfully", "success");
       loadAnnouncements();
     } catch (error) {
-      alert("Failed to delete announcement");
+      showAlert("Failed to delete announcement", "error");
     }
   };
 

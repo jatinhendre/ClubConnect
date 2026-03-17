@@ -50,7 +50,7 @@ function Resources() {
                   <td>{r.title}</td>
                   <td>
                     <a
-                      href={`http://localhost:5000/uploads/${r.file}`}
+                      href={r.file}
                       target="_blank"
                       className="btn btn-secondary"
                       style={{ padding: "4px 8px", fontSize: "12px", textDecoration: "none" }}

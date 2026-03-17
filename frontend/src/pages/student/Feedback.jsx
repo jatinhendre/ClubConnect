@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import api from "../../api/api";
+import { useAlert } from "../../context/AlertContext";
 
 function Feedback() {
 
@@ -7,6 +8,7 @@ function Feedback() {
   const [eventId, setEventId] = useState("");
   const [rating, setRating] = useState(5);
   const [comment, setComment] = useState("");
+  const { showAlert } = useAlert();
 
   useEffect(() => {
     api.get("/events").then((res) => {
@@ -16,8 +18,12 @@ function Feedback() {
 
   const submit = async (e) => {
     e.preventDefault();
-    await api.post("/feedback", { eventId, rating, comment });
-    alert("Feedback Sent");
+    try {
+       await api.post("/feedback", { eventId, rating, comment });
+       showAlert("Feedback Sent successfully", "success");
+    } catch (error) {
+       showAlert("Failed to send feedback", "error");
+    }
   };
 
   return (

@@ -1,10 +1,12 @@
 import { useEffect, useState } from "react";
 import api from "../../api/api";
+import { useAlert } from "../../context/AlertContext";
 
 function ClubRegistrations() {
   const [registrations, setRegistrations] = useState([]);
   const [loading, setLoading] = useState(true);
   const [filter, setFilter] = useState("all");
+  const { showAlert } = useAlert();
 
   useEffect(() => {
     fetchRegistrations();
@@ -26,10 +28,10 @@ function ClubRegistrations() {
 
     try {
       await api.patch(`/club-registrations/${id}`, { status });
-      alert(`Registration ${status} successfully!`);
+      showAlert(`Registration ${status} successfully!`, "success");
       fetchRegistrations();
     } catch (error) {
-      alert(error.response?.data?.message || "Failed to update status");
+      showAlert(error.response?.data?.message || "Failed to update status", "error");
     }
   };
 

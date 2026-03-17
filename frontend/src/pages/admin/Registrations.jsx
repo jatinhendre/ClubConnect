@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react";
 import api from "../../api/api";
+import { useAlert } from "../../context/AlertContext";
 
 function Registrations() {
 
   const [regs, setRegs] = useState([]);
+  const { showAlert } = useAlert();
 
   useEffect(() => {
     loadRegs();
@@ -25,9 +27,9 @@ function Registrations() {
         studentId,
         eventId
       });
-      alert("Certificate Generated");
+      showAlert("Certificate Generated successfully", "success");
     } catch (err) {
-      alert(err.response?.data?.message || "Already generated");
+      showAlert(err.response?.data?.message || "Already generated", "error");
     }
   };
 

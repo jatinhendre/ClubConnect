@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
 import api from "../api/api";
+import { useAlert } from "../context/AlertContext";
 
 function ViewEvents() {
   const [events, setEvents] = useState([]);
+  const { showAlert } = useAlert();
 
   useEffect(() => {
     api.get("/events").then((res) => {
@@ -10,8 +12,12 @@ function ViewEvents() {
     });
   }, []);
 const registerEvent = async (id) => {
-    await api.post("/registrations", { eventId: id });
-    alert("Registered");
+    try {
+      await api.post("/registrations", { eventId: id });
+      showAlert("Registered securely", "success");
+    } catch (error) {
+       showAlert("Failed to register", "error");
+    }
   };
 
 
@@ -30,7 +36,7 @@ const registerEvent = async (id) => {
             {event.poster && (
               <div className="poster-wrapper">
                 <img
-                  src={`http://localhost:5000/uploads/${event.poster}`}
+                  src={event.poster}
                   alt={event.title}
                 />
               </div>
