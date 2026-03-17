@@ -31,7 +31,7 @@ const app = express();
 
 app.use(
   cors({
-    origin: ["http://localhost:5175", "http://localhost:5176"],
+    origin: ["http://localhost:5175", "http://localhost:5176","https://club-connect-rouge.vercel.app","https://club-connect-x7s4.vercel.app"],
     credentials: true
   })
 );
