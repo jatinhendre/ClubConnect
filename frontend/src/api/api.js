@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const api = axios.create({
-  baseURL: "https://clubconnect-2mft.onrender.com"
+  baseURL: "https://clubconnect-2mft.onrender.com/api/"
 });
 
 api.interceptors.request.use((req) => {
